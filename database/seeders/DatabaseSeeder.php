@@ -1,0 +1,26 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //desabilita las restruicciones de claves foraneas
+        Schema::disableForeignKeyConstraints();
+
+        //Seeders
+        $this->call([UserSeeder::class]);
+
+        //habilita restricciones de claves foraneas
+        Schema::enableForeignKeyConstraints();
+    }
+}
