@@ -13,7 +13,7 @@ class SchoolAmbitController extends BaseController
      */
     public function index()
     {
-        $data = SchoolAmbit::all();
+        $data = SchoolAmbit::orderBy('name')->get();
         return $this->toResourceCollection($data);
     }
 }

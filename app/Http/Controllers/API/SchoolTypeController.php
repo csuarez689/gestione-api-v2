@@ -13,7 +13,7 @@ class SchoolTypeController extends BaseController
      */
     public function index()
     {
-        $data = SchoolType::all();
+        $data = SchoolType::orderBy('name')->get();
         return $this->toResourceCollection($data);
     }
 }

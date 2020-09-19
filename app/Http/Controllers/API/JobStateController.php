@@ -13,7 +13,7 @@ class JobStateController extends BaseController
      */
     public function index()
     {
-        $data = JobState::all();
+        $data = JobState::orderBy('name')->get();
         return $this->toResourceCollection($data);
     }
 }
