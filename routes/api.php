@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +30,7 @@ Route::group([
 Route::group(['as' => 'api.'], function () {
     Route::get('schoolSectors', [\App\Http\Controllers\API\SchoolSectorController::class, 'index']);
     Route::get('schoolAmbits', [\App\Http\Controllers\API\SchoolAmbitController::class, 'index']);
+    Route::get('schoolTypes', [\App\Http\Controllers\API\SchoolTypeController::class, 'index']);
 
     Route::apiResource('users', \App\Http\Controllers\API\UserController::class);
 });

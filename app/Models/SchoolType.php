@@ -3,10 +3,10 @@
 namespace App\Models;
 
 
-class SchoolAmbit extends BaseModel
+class SchoolType extends BaseModel
 {
     /** @var array $apiResource expose api resource corresponding class for the model */
-    public $apiResourceClass = \App\Http\Resources\SchoolAmbitResource::class;
+    public $apiResourceClass = \App\Http\Resources\SchoolTypeResource::class;
 
     /** @var array $searchable expose model attrubtes available for search */
     protected $searchable = ['name'];

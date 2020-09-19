@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             SchoolSectorSeeder::class,
-            SchoolAmbitSeeder::class
+            SchoolAmbitSeeder::class,
+            SchoolTypeSeeder::class,
         ]);
 
         //habilita restricciones de claves foraneas
