@@ -37,6 +37,7 @@ Route::group(['as' => 'api.'], function () {
     Route::get('journeyTypes', [\App\Http\Controllers\API\JourneyTypeController::class, 'index']);
     Route::get('schoolCategories', [\App\Http\Controllers\API\SchoolCategoryController::class, 'index']);
     Route::get('provinces', [\App\Http\Controllers\API\ProvinceController::class, 'index']);
+    Route::get('provinces/{province}/departments', [\App\Http\Controllers\API\DepartmentController::class, 'index']);
 
     Route::apiResource('users', \App\Http\Controllers\API\UserController::class);
 });

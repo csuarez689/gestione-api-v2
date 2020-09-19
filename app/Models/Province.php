@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
 class Province extends BaseModel
 {
     /** @var array $apiResource expose api resource corresponding class for the model */
