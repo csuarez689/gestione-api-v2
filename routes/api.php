@@ -30,5 +30,7 @@ Route::group([
 
 Route::group(['as' => 'api.'], function () {
     Route::get('schoolSectors', [\App\Http\Controllers\API\SchoolSectorController::class, 'index']);
+    Route::get('schoolAmbits', [\App\Http\Controllers\API\SchoolAmbitController::class, 'index']);
+
     Route::apiResource('users', \App\Http\Controllers\API\UserController::class);
 });

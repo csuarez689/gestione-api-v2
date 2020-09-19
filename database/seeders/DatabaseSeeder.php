@@ -18,7 +18,11 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         //Seeders
-        $this->call([UserSeeder::class]);
+        $this->call([
+            UserSeeder::class,
+            SchoolSectorSeeder::class,
+            SchoolAmbitSeeder::class
+        ]);
 
         //habilita restricciones de claves foraneas
         Schema::enableForeignKeyConstraints();
