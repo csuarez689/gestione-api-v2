@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SchoolLevel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -24,6 +25,8 @@ class DatabaseSeeder extends Seeder
             SchoolAmbitSeeder::class,
             SchoolTypeSeeder::class,
             JobStateSeeder::class,
+            SchoolLevelSeeder::class,
+            HighSchoolTypeSeeder::class
         ]);
 
         //habilita restricciones de claves foraneas
