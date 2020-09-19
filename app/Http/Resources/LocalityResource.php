@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProvinceResource extends JsonResource
+class LocalityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,8 @@ class ProvinceResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            '_links' => [
-                'deparments' => route('api.departments', $this->id)
-            ]
+            'department_id' => $this->department_id,
+            'department' => new DepartmentResource($this->whenLoaded('department')),
         ];
     }
 }

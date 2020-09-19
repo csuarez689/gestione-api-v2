@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Province;
+use App\Models\Department;
 
-class DepartmentController extends BaseController
+class LocalityController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Province $province)
+    public function index(Department $department)
     {
-        $data = $province->departments()->orderBy('name')->get();
+        $data = $department->localities()->orderBy('name')->get();
         return $this->toResourceCollection($data);
     }
 }
