@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             SchoolSectorSeeder::class,
             SchoolAmbitSeeder::class,
             SchoolTypeSeeder::class,
+            JobStateSeeder::class,
         ]);
 
         //habilita restricciones de claves foraneas
