@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             SchoolTypeSeeder::class,
             JobStateSeeder::class,
             SchoolLevelSeeder::class,
-            HighSchoolTypeSeeder::class
+            HighSchoolTypeSeeder::class,
+            JourneyTypeSeeder::class,
         ]);
 
         //habilita restricciones de claves foraneas
