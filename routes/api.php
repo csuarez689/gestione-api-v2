@@ -41,4 +41,5 @@ Route::group(['as' => 'api.'], function () {
     Route::get('departments/{department}/localities', [\App\Http\Controllers\API\LocalityController::class, 'index'])->name('localities');
 
     Route::apiResource('users', \App\Http\Controllers\API\UserController::class);
+    Route::apiResource('schools', \App\Http\Controllers\API\SchoolController::class);
 });
