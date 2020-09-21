@@ -37,7 +37,7 @@ class StoreSchoolRequest extends FormRequest
             'internal_phone' => 'nullable|digits_between:10,15',
             'email' => 'unique:schools,email|required|email|min:15|max:100',
             'number_students' => 'nullable|numeric|min:20|max:10000',
-            'bilingual' => 'boolean',
+            'bilingual' => 'required|boolean',
             'director' => 'required|string|min:5|max:150',
             'orientation' => 'required|string|min:10|max:150',
             'ambit_id' => 'required|exists:school_ambits,id',

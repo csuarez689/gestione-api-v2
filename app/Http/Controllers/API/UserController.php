@@ -17,7 +17,7 @@ class UserController extends BaseController
     public function index()
     {
         // where('id', '!=', Auth::user()->id)->with('school')->
-        $users = User::ApplyQueryParams();
+        $users = User::with('school')->ApplyQueryParams();
         return $this->toResourceCollection($users);
     }
 
