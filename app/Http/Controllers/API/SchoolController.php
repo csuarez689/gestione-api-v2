@@ -8,6 +8,12 @@ use App\Models\School;
 
 class SchoolController extends BaseController
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
