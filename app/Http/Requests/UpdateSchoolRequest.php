@@ -48,7 +48,7 @@ class UpdateSchoolRequest extends FormRequest
             'orientation' => 'required|string|min:10|max:150',
             'ambit_id' => 'required|exists:school_ambits,id',
             'sector_id' => 'required|exists:school_sectors,id',
-            'type_id' => 'required|exists:school_sectors,id',
+            'type_id' => 'required|exists:school_types,id',
             'level_id' => 'required|exists:school_levels,id',
             'category_id' => 'required|exists:school_categories,id',
             'journey_type_id' => 'required|exists:journey_types,id',

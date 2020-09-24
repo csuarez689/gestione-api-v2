@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -14,7 +15,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['login', 'register']);
+        $this->middleware('auth:api')->except(['login', 'recover_password']);
     }
 
     /**
@@ -24,8 +25,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-
-        if (!$token = auth('api')->attempt($request->validated())) {
+        if (!$token =  auth()->attempt($request->validated())) {
             return response()->json(['error' => 'No autorizado'], 401);
         }
 
@@ -37,7 +37,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function profile()
     {
         return response()->json(auth()->user());
     }
@@ -51,7 +51,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Se ha deslogueado con exito.']);
     }
 
     /**
@@ -76,7 +76,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 60, //response in secs
             'user' => auth()->user()
         ]);
     }

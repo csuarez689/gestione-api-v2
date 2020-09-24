@@ -10,7 +10,7 @@ class FormData extends Controller
     private $formData = [
         'ambits' => \App\Models\SchoolAmbit::class,
         'categories' => \App\Models\SchoolCategory::class,
-        'levels' => \App\Models\SchoolLeve::class,
+        'levels' => \App\Models\SchoolLevel::class,
         'sectors' => \App\Models\SchoolSector::class,
         'types' => \App\Models\SchoolType::class,
         'journey_types' => \App\Models\JourneyType::class,

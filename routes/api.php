@@ -19,15 +19,13 @@ Route::group([
     'prefix' => 'auth'
 
 ], function () {
-
     Route::post('login', [\App\Http\Controllers\API\AuthController::class, 'login']);
-    // Route::get('me', 'API/AuthController@me');
-    // Route::post('register', 'API/AuthController@register');
-    // Route::post('logout', 'API/AuthController@logout');
-    // Route::post('refresh', 'API/AuthController@refresh');
+    Route::post('logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
+    Route::get('profile', [\App\Http\Controllers\API\AuthController::class, 'profile']);
+    Route::post('refresh', [\App\Http\Controllers\API\AuthController::class, 'refresh']);
 });
 
-Route::group(['as' => 'api.'], function () {
+Route::group(['as' => 'api.', 'middleware' => 'auth:api'], function () {
     Route::get('provinces', [\App\Http\Controllers\API\ProvinceController::class, 'index'])->name('provinces');
     Route::get('provinces/{province}/departments', [\App\Http\Controllers\API\DepartmentController::class, 'index'])->name('departments');
     Route::get('departments/{department}/localities', [\App\Http\Controllers\API\LocalityController::class, 'index'])->name('localities');
