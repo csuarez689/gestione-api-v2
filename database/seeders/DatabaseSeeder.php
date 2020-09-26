@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ProvinceSeeder::class,
             DepartmentSeeder::class,
             LocalitySeeder::class,
+            TeacherSeeder::class,
             SchoolSeeder::class,
         ]);
 

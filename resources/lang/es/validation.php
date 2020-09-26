@@ -171,7 +171,9 @@ return [
         'high_school_type_id' => 'tipo de escuela secundaria',
         'locality_id' => 'localidad',
         'department_id' => 'departamento',
-        'provincia_id' => 'provincia'
+        'provincia_id' => 'provincia',
+        'gender' => 'genero',
+        'cuil' => 'CUIT/CUIL'
     ],
 
 ];
