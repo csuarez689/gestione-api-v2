@@ -4,6 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -15,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['login', 'recover_password']);
+        $this->middleware('auth:api')->except(['login', 'refresh']);
     }
 
     /**
@@ -25,7 +29,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        if (!$token =  auth()->attempt($request->validated())) {
+        if (!$token =  JWTAuth::attempt($request->validated())) {
             return response()->json(['error' => 'No autorizado'], 401);
         }
 
@@ -39,7 +43,7 @@ class AuthController extends Controller
      */
     public function profile()
     {
-        return response()->json(auth()->user());
+        return response()->json(JWTAuth::user()->loadMissing('school'));
     }
 
     /**
@@ -49,7 +53,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        JWTAuth::logout();
 
         return response()->json(['message' => 'Se ha deslogueado con exito.']);
     }
@@ -61,7 +65,21 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        $token = JWTAuth::getToken();
+
+        if (!$token) {
+            throw new BadRequestHttpException('Token not provided');
+        }
+        try {
+            $newToken = JWTAuth::refresh($token);
+        } catch (TokenBlacklistedException | TokenInvalidException $e) {
+            throw new AccessDeniedHttpException('The token is invalid');
+        }
+        return response()->json([
+            'access_token' => $newToken,
+            'token_type' => 'bearer',
+            'expires_in' =>  JWTAuth::factory()->getTTL() * 60, //response in secs
+        ]);
     }
 
     /**
@@ -73,13 +91,13 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        $user = auth()->user();
-        $user['school_id'] = $user->school ? $user->school->id : false;
+        $user =  JWTAuth::user();
+        $user['school_id'] = $user->school ? $user->school->id : null;
         unset($user->school);
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60, //response in secs
+            'expires_in' =>  JWTAuth::factory()->getTTL() * 60, //response in secs
             'user' => $user
         ]);
     }
