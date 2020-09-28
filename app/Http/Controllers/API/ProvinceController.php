@@ -13,7 +13,7 @@ class ProvinceController extends BaseController
      */
     public function index()
     {
-        $data = Province::orderBy('name')->get();
+        $data = Province::where('id', 74)->get();
         return $this->toResourceCollection($data);
     }
 }

@@ -53,7 +53,8 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        JWTAuth::logout();
+        $token = JWTAuth::getToken();
+        JWTAuth::invalidate($token);
 
         return response()->json(['message' => 'Se ha deslogueado con exito.']);
     }

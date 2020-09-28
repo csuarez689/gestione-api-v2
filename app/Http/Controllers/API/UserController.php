@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends BaseController
 {
@@ -22,8 +22,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        // where('id', '!=', Auth::user()->id)->with('school')->
-        $users = User::with('school')->ApplyQueryParams();
+        $users = User::where('id', '!=', Auth::user()->id)->with('school')->ApplyQueryParams();
         return $this->toResourceCollection($users);
     }
 

@@ -34,19 +34,7 @@ class UserSeeder extends Seeder
             'isAdmin' => User::ADMIN_USER,
         ];
 
-        //seed one admin user
-        $other = [
-            'name' => 'Claudio',
-            'last_name' => 'Suarez',
-            'dni' => '34608026',
-            'email' => 'csuarez@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('secret'),
-            'phone' => '2664774140',
-            'isAdmin' => User::REGULAR_USER,
-        ];
-
-        DB::table('users')->insert([$adminUser, $other]);
+        DB::table('users')->insert([$adminUser]);
 
         //seed regular user using factory
         User::factory()->times(100)->create();
