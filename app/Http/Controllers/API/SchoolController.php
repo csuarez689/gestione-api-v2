@@ -55,6 +55,7 @@ class SchoolController extends BaseController
      */
     public function show(School $school)
     {
+        $this->authorize('view', $school);
         $school->loadMissing([
             'locality.department',
             'user',

@@ -28,6 +28,27 @@ class School extends BaseModel
         'bilingual' => 'boolean'
     ];
 
+    /**
+     * Set the school's email.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    /**
+     * Set the school's orientation.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setOrientationAttribute($value)
+    {
+        $this->attributes['orientation'] = strtoupper($value);
+    }
 
     //--------------Relations--------------
 
@@ -74,5 +95,10 @@ class School extends BaseModel
     public function high_school_type()
     {
         return $this->belongsTo('App\Models\HighSchoolType');
+    }
+
+    public function teaching_plant()
+    {
+        return $this->hasMany('App\Models\TeachingPlant');
     }
 }

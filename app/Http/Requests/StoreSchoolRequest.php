@@ -43,7 +43,12 @@ class StoreSchoolRequest extends FormRequest
             'ambit_id' => 'required|exists:school_ambits,id',
             'sector_id' => 'required|exists:school_sectors,id',
             'type_id' => 'required|exists:school_types,id',
-            'level_id' => 'required|exists:school_levels,id',
+            'level_id' => [
+                'required', 'exists:school_levels,id',
+                Rule::unique('schools', 'level_id')->where(function ($query) {
+                    $query->where('cue', $this->request->get('cue'));
+                })
+            ],
             'category_id' => 'required|exists:school_categories,id',
             'journey_type_id' => 'required|exists:journey_types,id',
             'locality_id' => 'required|exists:localities,id',
@@ -62,6 +67,7 @@ class StoreSchoolRequest extends FormRequest
         return [
             'user_id.unique' => 'El usuario ya tiene una escuela asignada.',
             'cue.unique' => 'El CUE y nivel ya se encuentran registrados.',
+            'level_id.unique' => 'El CUE y nivel ya se encuentran registrados.',
         ];
     }
 }

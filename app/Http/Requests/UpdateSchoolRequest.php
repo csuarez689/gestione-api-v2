@@ -49,8 +49,12 @@ class UpdateSchoolRequest extends FormRequest
             'ambit_id' => 'required|exists:school_ambits,id',
             'sector_id' => 'required|exists:school_sectors,id',
             'type_id' => 'required|exists:school_types,id',
-            'level_id' => 'required|exists:school_levels,id',
-            'category_id' => 'required|exists:school_categories,id',
+            'level_id' => [
+                'required', 'exists:school_levels,id',
+                Rule::unique('schools', 'level_id')->ignore($this->school->id)->where(function ($query) {
+                    $query->where('cue', $this->request->get('cue'));
+                })
+            ],            'category_id' => 'required|exists:school_categories,id',
             'journey_type_id' => 'required|exists:journey_types,id',
             'locality_id' => 'required|exists:localities,id',
             'high_school_type_id' => 'nullable|required_if:level_id,3|exists:high_school_types,id',
@@ -72,6 +76,8 @@ class UpdateSchoolRequest extends FormRequest
         return [
             'user_id.unique' => 'El usuario ya tiene una escuela asignada.',
             'cue.unique' => 'El CUE y nivel ya se encuentran registrados.',
+            'level_id.unique' => 'El CUE y nivel ya se encuentran registrados.',
+
         ];
     }
 }
