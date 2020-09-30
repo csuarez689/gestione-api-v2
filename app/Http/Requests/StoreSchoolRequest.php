@@ -29,7 +29,7 @@ class StoreSchoolRequest extends FormRequest
             'cue' => [
                 'required', 'digits:9',
                 Rule::unique('schools', 'cue')->where(function ($query) {
-                    $query->where('level_id', $this->request->get('level_id'));
+                    $query->where('level_id', $this->level_id);
                 })
             ],
             'address' => 'required|string|min:10|max:150',
@@ -46,7 +46,7 @@ class StoreSchoolRequest extends FormRequest
             'level_id' => [
                 'required', 'exists:school_levels,id',
                 Rule::unique('schools', 'level_id')->where(function ($query) {
-                    $query->where('cue', $this->request->get('cue'));
+                    $query->where('cue', $this->cue);
                 })
             ],
             'category_id' => 'required|exists:school_categories,id',

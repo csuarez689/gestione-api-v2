@@ -15,7 +15,7 @@ class TeacherController extends BaseController
      */
     public function index()
     {
-        $teachers = Teacher::with('locality.department')->ApplyQueryParams();
+        $teachers = Teacher::with('locality.department')->applyQueryParams();
         return $this->toResourceCollection($teachers);
     }
 

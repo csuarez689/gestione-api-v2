@@ -173,7 +173,15 @@ return [
         'department_id' => 'departamento',
         'provincia_id' => 'provincia',
         'gender' => 'genero',
-        'cuil' => 'CUIT/CUIL'
+        'cuil' => 'CUIT/CUIL',
+        'year' => 'año',
+        'division' => 'division',
+        'subject' => 'materia',
+        'montly_hours' => 'horas mensuales',
+        'teacher_title' => 'titulo del docente',
+        'teacher_category_title' => 'categoria del titulo',
+        'job_state_id' => 'situación de revista',
+
     ],
 
 ];

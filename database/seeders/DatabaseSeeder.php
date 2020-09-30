@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             LocalitySeeder::class,
             TeacherSeeder::class,
             SchoolSeeder::class,
+            TeachingPlantSeeder::class,
         ]);
 
         //habilita restricciones de claves foraneas

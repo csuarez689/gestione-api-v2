@@ -38,7 +38,8 @@ class SchoolResource extends JsonResource
             'high_school_type' => new BaseResource($this->whenLoaded('high_school_type')),
             '_links' => [
                 'self' => route('api.schools.show', $this->id),
-                'user' => isset($this->user_id) ? route('api.users.show', $this->user_id) : null
+                'user' => isset($this->user_id) ? route('api.users.show', $this->user_id) : null,
+                'teaching_plant' => route('api.schools.teaching_plant.index', $this->id)
             ]
         ];
     }

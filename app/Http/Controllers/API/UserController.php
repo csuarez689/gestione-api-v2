@@ -22,7 +22,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $users = User::where('id', '!=', Auth::user()->id)->with('school')->ApplyQueryParams();
+        $users = User::where('id', '!=', Auth::user()->id)->with('school')->applyQueryParams();
         return $this->toResourceCollection($users);
     }
 

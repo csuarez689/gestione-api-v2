@@ -30,7 +30,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         if (!$token =  JWTAuth::attempt($request->validated())) {
-            return response()->json(['error' => 'No autorizado'], 401);
+            return response()->json(['error' => 'No autenticado'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -69,12 +69,12 @@ class AuthController extends Controller
         $token = JWTAuth::getToken();
 
         if (!$token) {
-            throw new BadRequestHttpException('Token not provided');
+            throw new BadRequestHttpException('Token invalido');
         }
         try {
             $newToken = JWTAuth::refresh($token);
         } catch (TokenBlacklistedException | TokenInvalidException $e) {
-            throw new AccessDeniedHttpException('The token is invalid');
+            throw new AccessDeniedHttpException('Token invalido');
         }
         return response()->json([
             'access_token' => $newToken,

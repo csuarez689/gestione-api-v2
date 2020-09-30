@@ -35,6 +35,6 @@ class Teacher extends BaseModel
 
     public function jobs()
     {
-        return $this->hasMany('App\Models\SchoolJobs');
+        return $this->hasMany('App\Models\TeachingPlant');
     }
 }

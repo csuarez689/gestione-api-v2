@@ -12,6 +12,7 @@ class SchoolController extends BaseController
     public function __construct()
     {
         $this->middleware('role:admin')->except('show');
+        $this->middleware('can:view,school')->only('show');
     }
 
     /**
@@ -31,7 +32,7 @@ class SchoolController extends BaseController
             'category',
             'journey_type',
             'high_school_type'
-        ])->ApplyQueryParams();
+        ])->applyQueryParams();
         return $this->toResourceCollection($schools);
     }
 
@@ -55,7 +56,6 @@ class SchoolController extends BaseController
      */
     public function show(School $school)
     {
-        $this->authorize('view', $school);
         $school->loadMissing([
             'locality.department',
             'user',

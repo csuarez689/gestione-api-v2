@@ -30,7 +30,7 @@ class UpdateSchoolRequest extends FormRequest
                 'required',
                 'digits:9',
                 Rule::unique('schools', 'cue')->ignore($this->school->id)->where(function ($query) {
-                    $query->where('level_id', $this->request->get('level_id'));
+                    $query->where('level_id', $this->level_id);
                 })
             ],
             'address' => 'required|string|min:10|max:150',
@@ -52,7 +52,7 @@ class UpdateSchoolRequest extends FormRequest
             'level_id' => [
                 'required', 'exists:school_levels,id',
                 Rule::unique('schools', 'level_id')->ignore($this->school->id)->where(function ($query) {
-                    $query->where('cue', $this->request->get('cue'));
+                    $query->where('cue', $this->cue);
                 })
             ],            'category_id' => 'required|exists:school_categories,id',
             'journey_type_id' => 'required|exists:journey_types,id',

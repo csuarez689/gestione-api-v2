@@ -20,6 +20,8 @@ Route::group(['prefix' => 'auth', 'as' => 'api.auth.'], function () {
     Route::post('refresh', [\App\Http\Controllers\API\AuthController::class, 'refresh'])->name('refresh');
 });
 
+
+
 Route::group(['as' => 'api.', 'middleware' => 'auth:api'], function () {
     Route::get('provinces', [\App\Http\Controllers\API\ProvinceController::class, 'index'])->name('provinces');
     Route::get('provinces/{province}/departments', [\App\Http\Controllers\API\DepartmentController::class, 'index'])->name('departments');
