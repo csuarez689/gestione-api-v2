@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Validator;
 
 class TeachingPlant extends BaseModel
 {
@@ -87,11 +88,11 @@ class TeachingPlant extends BaseModel
      */
     public function scopeFilterYearDivision($query)
     {
-        $yearArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        $divisionArray = ['A', 'B', 'C', 'D', 'E'];
+        $yearValidator = Validator::make(request()->query(), ['year' => 'digits:1']);
+        $divisionValidator = Validator::make(request()->query(), ['division' => 'alpha|min:1|max:1']);
 
-        $year = (request()->has('year') && in_array(request()->year, $yearArray)) ? request()->year : '%';
-        $division = (request()->has('division') && in_array(strtoupper(request()->division), $divisionArray)) ? request()->division : '%';
+        $year = !$yearValidator->fails() ? request()->year : '%';
+        $division = !$divisionValidator->fails() ? request()->division : '%';
         return $query->where([
             ['year', 'LIKE', $year],
             ['division', 'LIKE', $division],
