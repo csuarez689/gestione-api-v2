@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
             'last_name' => 'required|string|min:3|max:100',
             'dni' => 'unique:users,dni|required|digits:8',
             'phone' => 'required|digits_between:10,15',
-            'email' => 'unique:users,email|required|email|min:15|max:100',
+            'email' => 'unique:users,email|required|email:rfc,dns|min:15|max:100',
         ];
     }
 }

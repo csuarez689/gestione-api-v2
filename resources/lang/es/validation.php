@@ -181,7 +181,7 @@ return [
         'teacher_title' => 'titulo del docente',
         'teacher_category_title' => 'categoria del titulo',
         'job_state_id' => 'situación de revista',
-
+        'file' => 'archivo',
     ],
 
 ];

@@ -38,7 +38,7 @@ class UpdateSchoolRequest extends FormRequest
             'internal_phone' => 'nullable|digits_between:10,15',
             'email' => [
                 'required',
-                'email', 'min:15',
+                'email:rfc,dns', 'min:15',
                 'max:100',
                 Rule::unique('schools', 'email')->ignore($this->school->id)
             ],

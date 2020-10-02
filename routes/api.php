@@ -31,4 +31,7 @@ Route::group(['as' => 'api.', 'middleware' => 'auth:api'], function () {
     Route::apiResource('schools', \App\Http\Controllers\API\SchoolController::class);
     Route::apiResource('teachers', \App\Http\Controllers\API\TeacherController::class);
     Route::apiResource('schools.teaching_plant', \App\Http\Controllers\API\TeachingPlantController::class)->shallow();
+    Route::get('ordenes_merito', [\App\Http\Controllers\API\OrdenMeritoController::class, 'index'])->name('ordenes_merito.index');
+    Route::get('ordenes_merito/{orden_merito}', [\App\Http\Controllers\API\OrdenMeritoController::class, 'show'])->name('ordenes_merito.show');
+    Route::post('ordenes_merito/upload', [\App\Http\Controllers\API\OrdenMeritoController::class, 'upload'])->name('ordenes_merito.upload');
 });
