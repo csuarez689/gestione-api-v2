@@ -27,7 +27,7 @@ class TeachingPlantResource extends JsonResource
             'teacher' => new TeacherResource($this->whenLoaded('teacher')),
             'job_state' => new BaseResource($this->whenLoaded('job_state')),
             '_links' => [
-                'self' => route('api.teaching_plant.show', $this->id),
+                'self' => route('api.teachingPlant.show', $this->id),
                 'teacher' => isset($this->teacher_id) ? route('api.teachers.show', $this->teacher_id) : null,
                 'school' => isset($this->school_id) ? route('api.schools.show', $this->school_id) : null,
             ]

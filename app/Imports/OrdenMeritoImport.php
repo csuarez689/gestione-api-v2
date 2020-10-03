@@ -3,12 +3,12 @@
 namespace App\Imports;
 
 use App\Exceptions\ExcededFailedImportRows;
+use App\Http\Requests\StoreOrdenMeritoRequest;
 use App\Models\FailedOrdenMerito;
 use App\Models\OrdenMerito;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -50,9 +50,9 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
                 'title1' => $row['titulo_1'],
                 'title2' => $row['titulo_2'],
                 'year' => $this->year,
-            ];
+            ];;
 
-            $validator = Validator::make($mappedRow, $this->getRules(), $this->getValidationMessages());
+            $validator = Validator::make($mappedRow,   $this->getRules(), $this->getValidationMessages());
 
             if ($validator->fails()) {
                 if ($this->failsCounter > 20) {
@@ -101,6 +101,8 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
             'incumbency.regex' => 'Valores permitidos: A1|A2|A3|B1|B2|B3|B4|B5|C1|C2|C3.',
             'level.regex' => 'Valores permitidos: Inicial|Primario|Secundario.',
             'cuil.regex' => 'Formato cuil invalido.',
+            'cuil.unique' => 'El cuil ya se encuentra registrado con este cargo y año.',
+
         ];
     }
     public function formatCuil($value): string

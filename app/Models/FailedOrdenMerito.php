@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+
 
 class FailedOrdenMerito extends BaseModel
 {
     /** @var array $apiResource expose api resource corresponding class for the model */
-    public $apiResourceClass = \App\Http\Resources\BaseResource::class;
+    public $apiResourceClass = \App\Http\Resources\FailedOrdenMeritoResource::class;
 
     /** @var array $searchable expose model attrubtes available for search */
     protected $searchable = ['name', 'last_name', 'cuil', 'locality', 'charge', 'title1', 'title2'];

@@ -63,9 +63,8 @@ class OrdenMeritoController extends BaseController
             $import = new OrdenMeritoImport(request()->year);
             Excel::import($import, $path);
         } catch (ExcededFailedImportRows $e) {
-            return response()->json(["message" => "Demasiados registros incorrectos. Revise el documento."], 422);
+            return response()->json(["message" => $e->getMessage()], $e->getCode());
         } catch (Exception $e) {
-            dump($e);
             return response()->json(["message" => "Ocurrio un error al procesar el archivo."], 500);
         }
 

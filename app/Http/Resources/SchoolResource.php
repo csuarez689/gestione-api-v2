@@ -39,7 +39,7 @@ class SchoolResource extends JsonResource
             '_links' => [
                 'self' => route('api.schools.show', $this->id),
                 'user' => isset($this->user_id) ? route('api.users.show', $this->user_id) : null,
-                'teaching_plant' => route('api.schools.teaching_plant.index', $this->id)
+                'teaching_plant' => route('api.schools.teachingPlant.index', $this->id)
             ]
         ];
     }

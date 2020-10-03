@@ -6,7 +6,7 @@ namespace App\Models;
 class OrdenMerito extends BaseModel
 {
     /** @var array $apiResource expose api resource corresponding class for the model */
-    public $apiResourceClass = \App\Http\Resources\BaseResource::class;
+    public $apiResourceClass = \App\Http\Resources\OrdenMeritoResource::class;
 
     /** @var array $searchable expose model attrubtes available for search */
     protected $searchable = ['name', 'last_name', 'cuil', 'locality', 'charge', 'title1', 'title2'];
