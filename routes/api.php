@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('userss', function ($id) {
+    $users = User::all();
+    return $users;
+});
 
 //-------------AUTH ROUTES-------------
 Route::group(['prefix' => 'auth', 'as' => 'api.auth.'], function () {
