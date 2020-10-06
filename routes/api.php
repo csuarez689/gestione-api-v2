@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('userss', function () {
-    $users = User::all();
-    return $users;
-});
 
 //-------------AUTH ROUTES-------------
 Route::group(['prefix' => 'auth', 'as' => 'api.auth.'], function () {
