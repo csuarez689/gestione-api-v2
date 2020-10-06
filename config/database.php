@@ -49,7 +49,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-        'mysql' => [
+        'mysql' => array(
             'driver'    => 'mysql',
             'host'      => $host,
             'database'  => $database,
@@ -60,7 +60,7 @@ return [
             'prefix'    => '',
             'strict' => true,
             'engine' => null,
-        ],
+        ),
         // 'mysql' => [
         //     'driver' => 'mysql',
         //     'url' => env('DATABASE_URL'),
