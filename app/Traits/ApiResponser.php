@@ -72,19 +72,19 @@ trait ApiResponser
         return $transformed;
     }
 
-    protected function cachedResponse($data)
-    {
-        // se ordenan los parametros y reconstruye full url
-        // para diferenciar las peticiones y la cache funcione adecuadamente
-        $url = request()->url();
-        $queryParams = request()->query();
-        ksort($queryParams);
-        $queryString = http_build_query($queryParams);
-        $fullUrl = "{$url}?{$queryString}";
+    //     protected function cachedResponse($data)
+    //     {
+    //         // se ordenan los parametros y reconstruye full url
+    //         // para diferenciar las peticiones y la cache funcione adecuadamente
+    //         $url = request()->url();
+    //         $queryParams = request()->query();
+    //         ksort($queryParams);
+    //         $queryString = http_build_query($queryParams);
+    //         $fullUrl = "{$url}?{$queryString}";
 
-        return Cache::remember($fullUrl, 30, function () use ($data) {
-            return $data;
-        });
-        return $data;
-    }
+    //         return Cache::remember($fullUrl, 30, function () use ($data) {
+    //             return $data;
+    //         });
+    //         return $data;
+    //     }
 }

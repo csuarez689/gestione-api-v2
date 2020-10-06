@@ -53,6 +53,7 @@ trait ApplyQueryParams
             //perform pagination
             $query = $query->paginate($perPage);
             //maintain query params in pagination
+            $query->appends(request()->query());
         } else {
             $query = $query->get();
         }
