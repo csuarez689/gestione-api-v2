@@ -3,9 +3,10 @@
 use Illuminate\Support\Str;
 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$host = $url["host"] ?? null;
-$username = $url["user"] ?? null;
-$password = $url["pass"] ?? null;
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
 $database = substr($url["path"], 1);
 
 return [
@@ -49,16 +50,14 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
         'mysql' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', 'db4free.net'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'gestioneapi'),
-            'username' => env('DB_USERNAME', 'csuarez689'),
-            'password' => env('DB_PASSWORD', 'gestionepota2020'),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
+            'driver'    => 'mysql',
+            'host'      => $host,
+            'database'  => $database,
+            'username'  => $username,
+            'password'  => $password,
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
             'strict' => true,
             'engine' => null,
         ],
