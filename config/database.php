@@ -52,7 +52,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'db4free.net'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'gestione-api'),
+            'database' => env('DB_DATABASE', 'gestioneapi'),
             'username' => env('DB_USERNAME', 'csuarez689'),
             'password' => env('DB_PASSWORD', 'gestionepota2020'),
             'unix_socket' => env('DB_SOCKET', ''),
