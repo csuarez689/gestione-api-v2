@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('userss', function ($id) {
+Route::get('userss', function () {
     $users = User::all();
     return $users;
 });
