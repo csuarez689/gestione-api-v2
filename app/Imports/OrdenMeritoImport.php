@@ -38,17 +38,17 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
             $this->currentCharge = $row['cargo'];
             $mappedRow = [
-                'incumbency' => $row['incumbencia'],
+                'incumbency' => strtoupper($row['incumbencia']),
                 'region' => $row['region'],
-                'level' => $row['nivel'],
-                'name' => $row['nombre'],
-                'last_name' => $row['apellido'],
+                'level' => strtoupper($row['nivel']),
+                'name' => strtoupper($row['nombre']),
+                'last_name' => strtoupper($row['apellido']),
                 'cuil' => $this->formatCuil($row['cuil']),
-                'gender' => $row['sexo'],
-                'locality' => $row['localidad'],
-                'charge' => $row['cargo'],
-                'title1' => $row['titulo_1'],
-                'title2' => $row['titulo_2'],
+                'gender' => strtoupper($row['sexo']),
+                'locality' => strtoupper($row['localidad']),
+                'charge' => strtoupper($row['cargo']),
+                'title1' => strtoupper($row['titulo_1']),
+                'title2' => strtoupper($row['titulo_2']),
                 'year' => $this->year,
             ];;
 
@@ -86,7 +86,7 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
                     ]);
                 })
             ],
-            'gender' => 'required|in:Masculino,Femenino',
+            'gender' => 'required|in:MASCULINO,FEMENINO',
             'locality' => 'required|max:50',
             'charge' => 'required|max:100',
             'title1' => 'required|max:100',

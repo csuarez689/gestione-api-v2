@@ -16,7 +16,7 @@ class OrdenMeritoResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "incumbency" => $this->incumbency,
+            "incumbency" => $this->incumbency ? $this->incumbency : 'Sin Especificar',
             "region" => $this->region,
             "level" => $this->level,
             "last_name" => $this->last_name,

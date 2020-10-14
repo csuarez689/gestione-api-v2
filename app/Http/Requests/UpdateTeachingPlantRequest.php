@@ -29,19 +29,19 @@ class UpdateTeachingPlantRequest extends FormRequest
             'division' => 'required|in:A,B,C,D,E',
             'subject' => [
                 'required', 'string', 'min:5', 'max:100',
-                Rule::unique('schools_teachers', 'subject')->ignore($this->teaching_plant->id)->where(function ($query) {
+                Rule::unique('schools_teachers', 'subject')->ignore($this->teachingPlant->id)->where(function ($query) {
                     $query->where([
                         ['year', '=', $this->year],
                         ['division', '=', $this->division],
-                        ['school_id', '=', $this->teaching_plant->school->id],
+                        ['school_id', '=', $this->teachingPlant->school->id],
                     ]);
                 })
             ],
             'monthly_hours' => 'required|numeric|between:10,200',
-            'teacher_title' => 'required|string|min:10|max:150',
-            'teacher_category_title' => 'required|in:DOCENTE,NO DOCENTE',
+            'teacher_title' => 'nullable|required_with:teacher_id|string|min:10|max:150',
+            'teacher_category_title' => 'nullable|required_with:teacher_id|in:DOCENTE,NO DOCENTE',
             'teacher_id' => 'nullable|exists:teachers,id',
-            'job_state_id' => 'required|exists:job_states,id',
+            'job_state_id' => 'nullable|required_with:teacher_id|exists:job_states,id',
         ];
     }
 

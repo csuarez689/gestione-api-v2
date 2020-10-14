@@ -17,10 +17,10 @@ class RoleUser
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        $role = ($role == 'admin') ? true : false;
-        if (Auth::user()->isAdmin == $role) {
-            return $next($request);
+        $permission = ($role === "admin") ? true : false;
+        if (auth()->user()->isAdmin != $permission) {
+            return response()->json(["message" => 'No autorizado'], 403);
         }
-        return response()->json(["message" => 'No autorizado'], 403);
+        return $next($request);
     }
 }

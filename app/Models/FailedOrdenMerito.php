@@ -10,10 +10,10 @@ class FailedOrdenMerito extends BaseModel
     public $apiResourceClass = \App\Http\Resources\FailedOrdenMeritoResource::class;
 
     /** @var array $searchable expose model attrubtes available for search */
-    protected $searchable = ['name', 'last_name', 'cuil', 'locality', 'charge', 'title1', 'title2'];
+    protected $searchable = ['name', 'last_name', 'cuil', 'locality', 'charge', 'title1', 'title2', 'year', 'incumbency'];
 
     /** @var array $sortable expose model attrubtes available for sort_by */
-    protected $sortable = ['id', 'region', 'level', 'gender', 'incumbency', 'name', 'last_name', 'cuil', 'locality', 'charge', 'title1', 'title2', 'updated_at', 'created_at'];
+    protected $sortable = ['id', 'region', 'level', 'gender', 'incumbency', 'name', 'last_name', 'cuil', 'locality', 'charge', 'title1', 'title2', 'updated_at', 'created_at', 'year'];
 
     /**
      * The attributes that are not mass assignable.

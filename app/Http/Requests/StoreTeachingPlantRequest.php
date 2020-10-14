@@ -38,10 +38,10 @@ class StoreTeachingPlantRequest extends FormRequest
                 })
             ],
             'monthly_hours' => 'required|numeric|between:10,200',
-            'teacher_title' => 'required|string|min:10|max:150',
-            'teacher_category_title' => 'required|in:DOCENTE,NO DOCENTE',
+            'teacher_title' => 'nullable|required_with:teacher_id|string|min:10|max:150',
+            'teacher_category_title' => 'nullable|required_with:teacher_id|in:DOCENTE,NO DOCENTE',
             'teacher_id' => 'nullable|exists:teachers,id',
-            'job_state_id' => 'required|exists:job_states,id',
+            'job_state_id' => 'nullable|required_with:teacher_id|exists:job_states,id',
         ];
     }
 

@@ -13,10 +13,11 @@ class TeachingPlantController extends BaseController
     public function __construct()
     {
         $this->middleware('role:regular');
+
         $this->middleware('can:view,school')->only(['index', 'store']);
-        $this->middleware('can:view,teaching_plant')->only('show');
-        $this->middleware('can:update,teaching_plant')->only('update');
-        $this->middleware('can:delete,teaching_plant')->only('destroy');
+        $this->middleware('can:view,teachingPlant')->only('show');
+        $this->middleware('can:update,teachingPlant')->only('update');
+        $this->middleware('can:delete,teachingPlant')->only('destroy');
     }
 
     /**
@@ -26,7 +27,7 @@ class TeachingPlantController extends BaseController
      */
     public function index(School $school)
     {
-        $teachingPlant = $school->teaching_plant()->with(['teacher', 'job_state'])->filterYearDivision()->applyQueryParams();
+        $teachingPlant = $school->teaching_plant()->with(['teacher.locality.department', 'job_state'])->filterYearDivision()->applyQueryParams();
         return $this->toResourceCollection($teachingPlant);
     }
 
@@ -53,6 +54,7 @@ class TeachingPlantController extends BaseController
      */
     public function show(TeachingPlant $teachingPlant)
     {
+        $teachingPlant->loadMissing('teacher.locality.department', 'job_state');
         return $this->toResource($teachingPlant);
     }
 

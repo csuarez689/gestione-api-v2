@@ -98,7 +98,7 @@ class AuthController extends BaseController
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' =>  JWTAuth::factory()->getTTL() * 60, //response in secs
-            'user' => $this->toResource($user),
+            'user' => $user,
         ]);
     }
 }

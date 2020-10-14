@@ -21,7 +21,7 @@ class SchoolPolicy
     {
 
         $isAdmin = $user->isAdmin;
-        $hasPermission = $user->school ? $user->school->id === $school->id : false;
+        $hasPermission = $user->school ?? $user->school->id === $school->id;
 
         return ($isAdmin || $hasPermission) ? Response::allow() : Response::deny('No tienes asignada esta escuela');
     }

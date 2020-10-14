@@ -19,12 +19,12 @@ class CreateSchoolsTeachersTable extends Migration
             $table->string('division');
             $table->string('subject');
             $table->smallInteger('monthly_hours');
-            $table->string('teacher_title');
-            $table->string('teacher_category_title');
+            $table->string('teacher_title')->nullable();
+            $table->string('teacher_category_title')->nullable();
 
-            $table->foreignId('school_id')->onDelete('cascade');
-            $table->foreignId('teacher_id')->nullable()->onDelete('set null');
-            $table->foreignId('job_state_id');
+            $table->foreignId('school_id')->constrained()->onDelete('cascade');
+            $table->foreignId('teacher_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('job_state_id')->nullable()->constrained();
 
             $table->unique(['year', 'division', 'subject', 'school_id']);
 

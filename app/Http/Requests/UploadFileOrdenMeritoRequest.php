@@ -25,7 +25,7 @@ class UploadFileOrdenMeritoRequest extends FormRequest
     {
         return [
             'file' => 'required|mimes:xls,xlsx,csv,txt|file|max:10000',
-            'year' => 'required|integer|between:2000,2030'
+            'year' => 'required|integer|between:2000,2020'
         ];
     }
 

@@ -13,10 +13,10 @@ class TeachingPlant extends BaseModel
     public $apiResourceClass = \App\Http\Resources\TeachingPlantResource::class;
 
     /** @var array $searchable expose model attrubtes available for search */
-    protected $searchable = ['year', 'division', 'subject', 'teacher_title', 'teacher_category_title'];
+    protected $searchable = ['year', 'division', 'subject', 'teacher_title', 'teacher_category_title', 'monthly_hours'];
 
     /** @var array $sortable expose model attrubtes available for sort_by */
-    protected $sortable = ['id', 'year', 'division', 'subject', 'teacher_title', 'teacher_category_title', 'updated_at', 'created_at'];
+    protected $sortable = ['id', 'year', 'division', 'subject', 'teacher_title', 'teacher_category_title', 'monthly_hours', 'updated_at', 'created_at'];
 
     /**
      * The attributes that are not mass assignable.
