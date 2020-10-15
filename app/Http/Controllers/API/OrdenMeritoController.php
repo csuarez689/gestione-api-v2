@@ -57,7 +57,7 @@ class OrdenMeritoController extends BaseController
             $headers = (new HeadingRowImport)->toArray($path);
 
             if ($headerErrors = $this->validateHeaders($headers[0][0])) {
-                return response()->json(['message' => $headerErrors], 422);
+                return response()->json(["errors" => ['message' => $headerErrors]], 422);
             }
 
             $import = new OrdenMeritoImport(request()->year);
@@ -68,7 +68,7 @@ class OrdenMeritoController extends BaseController
             return response()->json(["message" => "Ocurrio un error al procesar el archivo."], 500);
         }
 
-        return response()->json(["failed_rows" => $import->getFailsCounter()]);
+        return response()->json($import->getJsonResponse());
     }
 
     //------------------HELPERS------------------

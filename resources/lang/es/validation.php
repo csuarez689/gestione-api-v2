@@ -165,11 +165,13 @@ return [
         'school_id' => 'escuela',
         'type_id' => 'tipo',
         'level_id' => 'nivel',
+        'level' => 'nivel',
         'ambit_id' => 'ámbito',
         'category_id' => 'categoría',
         'journey_type_id' => 'tipo de jornada',
         'high_school_type_id' => 'tipo de escuela secundaria',
         'locality_id' => 'localidad',
+        'locality' => 'localidad',
         'department_id' => 'departamento',
         'provincia_id' => 'provincia',
         'gender' => 'genero',
@@ -182,7 +184,13 @@ return [
         'teacher_category_title' => 'categoria del titulo',
         'job_state_id' => 'situación de revista',
         'file' => 'archivo',
-        'teacher_id' => 'profesor'
+        'teacher_id' => 'profesor',
+        'charge' => 'cargo',
+        'incumbency' => 'incumbencia',
+        'region' => 'región',
+        'title1' => 'titulo principal',
+        'title2' => 'titulo secundario'
+
     ],
 
 ];

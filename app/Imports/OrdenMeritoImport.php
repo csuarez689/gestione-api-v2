@@ -19,6 +19,8 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
 
     private $failsCounter;
 
+    private $successCounter;
+
     private $currentCharge;
 
     public function __construct($year)
@@ -38,17 +40,17 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
             $this->currentCharge = $row['cargo'];
             $mappedRow = [
-                'incumbency' => strtoupper($row['incumbencia']),
+                'incumbency' => $row['incumbencia'],
                 'region' => $row['region'],
-                'level' => strtoupper($row['nivel']),
-                'name' => strtoupper($row['nombre']),
-                'last_name' => strtoupper($row['apellido']),
+                'level' => $row['nivel'],
+                'name' => $row['nombre'],
+                'last_name' => $row['apellido'],
                 'cuil' => $this->formatCuil($row['cuil']),
-                'gender' => strtoupper($row['sexo']),
-                'locality' => strtoupper($row['localidad']),
-                'charge' => strtoupper($row['cargo']),
-                'title1' => strtoupper($row['titulo_1']),
-                'title2' => strtoupper($row['titulo_2']),
+                'gender' => $row['sexo'],
+                'locality' => $row['localidad'],
+                'charge' => $row['cargo'],
+                'title1' => $row['titulo_1'],
+                'title2' => $row['titulo_2'],
                 'year' => $this->year,
             ];;
 
@@ -64,9 +66,9 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
                 FailedOrdenMerito::create($mappedRow);
             } else {
                 OrdenMerito::create($mappedRow);
+                $this->successCounter += 1;
             }
         }
-        return $this->failsCounter;
     }
 
     private function getRules(): array
@@ -100,8 +102,8 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
         return [
             'incumbency.regex' => 'Valores permitidos: A1|A2|A3|B1|B2|B3|B4|B5|C1|C2|C3.',
             'level.regex' => 'Valores permitidos: Inicial|Primario|Secundario.',
-            'cuil.regex' => 'Formato cuil invalido.',
-            'cuil.unique' => 'El cuil ya se encuentra registrado con este cargo y año.',
+            'cuil.regex' => 'Formato CUIL/CUIT invalido.',
+            'cuil.unique' => 'El CUIL/CUIT ya se encuentra registrado con este cargo y año.',
 
         ];
     }
@@ -117,5 +119,15 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
     public function getFailsCounter(): int
     {
         return $this->failsCounter;
+    }
+
+    public function getSuccessCounter(): int
+    {
+        return $this->successCounter;
+    }
+
+    public function getJsonResponse(): array
+    {
+        return ["success_rows" => $this->getSuccessCounter(), "failed_rows" => $this->getFailsCounter()];
     }
 }

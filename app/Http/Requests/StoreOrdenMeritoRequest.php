@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Locality;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -39,12 +40,12 @@ class StoreOrdenMeritoRequest extends FormRequest
                     ]);
                 })
             ],
-            'gender' => 'required|in:Masculino,Femenino',
+            'gender' => 'required|in:FEMENINO,MASCULINO',
             'locality' => 'required|max:50',
             'charge' => 'required|max:100',
             'title1' => 'required|max:100',
             'title2' => 'nullable|max:100',
-            'year' => 'required|integer|between:2000,2030'
+            'year' => 'required|integer|between:2000,2020'
         ];
     }
 
