@@ -20,9 +20,9 @@ class TeachingPlantPolicy
      */
     public function view(User $user, TeachingPlant $teachingPlant)
     {
-        $hasPermission = $user->school ?? $user->school->id === $teachingPlant->school_id;
+        $hasPermission = $user->school ? $user->school->id === $teachingPlant->school_id : false;
 
-        return $hasPermission ? Response::allow() : Response::deny('No tienes asignada esta escuela');
+        return $this->getResponse($hasPermission);
     }
 
     /**
@@ -34,9 +34,9 @@ class TeachingPlantPolicy
      */
     public function update(User $user, TeachingPlant $teachingPlant)
     {
-        $hasPermission = $user->school ?? $user->school->id === $teachingPlant->school_id;
+        $hasPermission = $user->school ? $user->school->id === $teachingPlant->school_id : false;
 
-        return $hasPermission ? Response::allow() : Response::deny('No tienes asignada esta escuela');
+        return $this->getResponse($hasPermission);
     }
 
     /**
@@ -48,8 +48,13 @@ class TeachingPlantPolicy
      */
     public function delete(User $user, TeachingPlant $teachingPlant)
     {
-        $hasPermission = $user->school ?? $user->school->id === $teachingPlant->school_id;
+        $hasPermission = $user->school ? $user->school->id === $teachingPlant->school_id  : false;
 
-        return $hasPermission ? Response::allow() : Response::deny('No tienes asignada esta escuela');
+        return $this->getResponse($hasPermission);
+    }
+
+    private function getResponse(bool $permission)
+    {
+        return $permission ? Response::allow() : Response::deny('No tienes asignada esta escuela');
     }
 }

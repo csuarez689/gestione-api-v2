@@ -65,6 +65,7 @@ class OrdenMeritoController extends BaseController
         } catch (ExcededFailedImportRows $e) {
             return response()->json(["message" => $e->getMessage()], $e->getCode());
         } catch (Exception $e) {
+            dump($e);
             return response()->json(["message" => "Ocurrio un error al procesar el archivo."], 500);
         }
 

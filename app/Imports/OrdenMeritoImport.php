@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Exceptions\ExcededFailedImportRows;
-use App\Http\Requests\StoreOrdenMeritoRequest;
 use App\Models\FailedOrdenMerito;
 use App\Models\OrdenMerito;
 use Illuminate\Support\Collection;
@@ -36,7 +35,6 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
      */
     public function collection(Collection $rows)
     {
-
         foreach ($rows as $row) {
             $this->currentCharge = $row['cargo'];
             $mappedRow = [
@@ -57,13 +55,13 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
             $validator = Validator::make($mappedRow,   $this->getRules(), $this->getValidationMessages());
 
             if ($validator->fails()) {
-                if ($this->failsCounter > 20) {
+                if ($this->failsCounter > 50) {
                     throw new ExcededFailedImportRows();
                 }
                 $this->failsCounter += 1;
                 $errors = json_encode($validator->messages()->get('*'));
                 $mappedRow['errors'] = $errors;
-                FailedOrdenMerito::create($mappedRow);
+                dump(FailedOrdenMerito::create($mappedRow));
             } else {
                 OrdenMerito::create($mappedRow);
                 $this->successCounter += 1;
@@ -88,7 +86,7 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
                     ]);
                 })
             ],
-            'gender' => 'required|in:MASCULINO,FEMENINO',
+            'gender' => ['required', 'regex:/(femenino|masculino)/i'],
             'locality' => 'required|max:50',
             'charge' => 'required|max:100',
             'title1' => 'required|max:100',
