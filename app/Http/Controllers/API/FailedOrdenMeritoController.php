@@ -79,6 +79,6 @@ class FailedOrdenMeritoController extends BaseController
     public function truncate()
     {
         DB::table('failed_orden_meritos')->truncate();
-        return response()->json(['message' => 'Registros eliminados.']);
+        return response()->json(['message' => 'Se han eliminado los registros erroneos.']);
     }
 }

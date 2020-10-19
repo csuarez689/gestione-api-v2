@@ -53,7 +53,6 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
             ];;
 
             $validator = Validator::make($mappedRow,   $this->getRules(), $this->getValidationMessages());
-
             if ($validator->fails()) {
                 if ($this->failsCounter > 50) {
                     throw new ExcededFailedImportRows();
@@ -61,7 +60,7 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
                 $this->failsCounter += 1;
                 $errors = json_encode($validator->messages()->get('*'));
                 $mappedRow['errors'] = $errors;
-                dump(FailedOrdenMerito::create($mappedRow));
+                FailedOrdenMerito::create($mappedRow);
             } else {
                 OrdenMerito::create($mappedRow);
                 $this->successCounter += 1;
