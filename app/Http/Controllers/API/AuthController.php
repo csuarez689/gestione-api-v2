@@ -77,7 +77,7 @@ class AuthController extends BaseController
 
         return $status === Password::RESET_LINK_SENT
             ? response()->json(['message' => 'Se ha enviado el correo para configurar su contraseña.'])
-            : response()->json(['email' => __($status)], 400);
+            : response()->json(['message' => __($status)], 400);
     }
 
     /**
@@ -104,7 +104,7 @@ class AuthController extends BaseController
 
         return $status == Password::PASSWORD_RESET
             ? response()->json(['message' => 'Se ha configurado su nueva contraseña.'])
-            : response()->json(['email' => __($status)], 400);
+            : response()->json(['message' => __($status)], 400);
     }
 
     /**

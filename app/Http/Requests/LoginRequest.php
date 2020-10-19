@@ -24,8 +24,20 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|exists:users,email',
             'password' => 'required|string|min:6',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.exists' => 'El correo no se encuentra registrado.',
         ];
     }
 }

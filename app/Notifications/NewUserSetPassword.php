@@ -40,11 +40,11 @@ class NewUserSetPassword extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('http://localhost:8080/auth/reset_password/' . $this->token);
+        $url = url('http://localhost:8080/login/resetPassword/' . $this->token);
 
         return (new MailMessage)
             ->line('Se ha creado la cuenta de manera exitosa.')
-            ->action('Configura tu contraseña.', $url)
+            ->action('Configura tu contraseña', $url)
             ->line('Gracias por usar nuestra aplicación!');
     }
 

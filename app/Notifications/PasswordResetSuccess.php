@@ -42,7 +42,7 @@ class PasswordResetSuccess extends Notification
     {
         return (new MailMessage)
             ->line('Se ha actualizado tu contraseña.')
-            ->line('En caso de que no hallas solicitado esta acción, contactate con el administrador')
+            ->line('En caso de que no hallas solicitado esta acción, contactate con el administrador.')
             ->line('Gracias por usar nuestra aplicación!');
     }
 

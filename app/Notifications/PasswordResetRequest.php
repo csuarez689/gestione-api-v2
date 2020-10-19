@@ -43,12 +43,12 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('http://localhost:8080/auth/reset_password/' . $this->token);
+        $url = url('http://localhost:8080/login/resetPassword/' . $this->token);
 
         return (new MailMessage)
             ->line('Has recibido este correo para resetear el accesso a tu cuenta.')
-            ->action('Crear nueva contraseña.', $url)
-            ->line('Si tu no solicitaste esta acción, por favor ignora esta notificación');
+            ->action('Crear nueva contraseña', $url)
+            ->line('Si tu no solicitaste esta acción, por favor ignora esta notificación.');
     }
 
     /**
