@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\LoginRequest;
+use App\Notifications\PasswordResetSuccess;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
@@ -18,7 +22,7 @@ class AuthController extends BaseController
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['login', 'refresh']);
+        $this->middleware('auth:api')->except(['login', 'refresh', 'forgotPassword', 'resetPassword']);
     }
 
     /**
@@ -59,7 +63,52 @@ class AuthController extends BaseController
     }
 
     /**
-     * Refresh a token.
+     * Create password reset token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email:rfc,dns',]);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT
+            ? response()->json(['message' => 'Se ha enviado el correo para configurar su contraseña.'])
+            : response()->json(['email' => __($status)], 400);
+    }
+
+    /**
+     * Reset password
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) use ($request) {
+                $user->forceFill(['password' => Hash::make($password)])->save();
+
+                $user->notify(new PasswordResetSuccess);
+            }
+        );
+
+        return $status == Password::PASSWORD_RESET
+            ? response()->json(['message' => 'Se ha configurado su nueva contraseña.'])
+            : response()->json(['email' => __($status)], 400);
+    }
+
+    /**
+     * Refresh token.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -81,6 +130,7 @@ class AuthController extends BaseController
             'expires_in' =>  JWTAuth::factory()->getTTL() * 60, //response in secs
         ]);
     }
+
 
     /**
      * Get the token array structure.

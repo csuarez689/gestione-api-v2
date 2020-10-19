@@ -189,8 +189,7 @@ return [
         'incumbency' => 'incumbencia',
         'region' => 'región',
         'title1' => 'titulo principal',
-        'title2' => 'titulo secundario'
-
+        'title2' => 'titulo secundario',
     ],
 
 ];

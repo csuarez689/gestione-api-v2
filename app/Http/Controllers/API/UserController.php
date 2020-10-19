@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends BaseController
 {
@@ -35,6 +36,10 @@ class UserController extends BaseController
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->validated());
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
         return $this->toResource($user);
     }
 
