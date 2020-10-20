@@ -19,9 +19,11 @@ Route::group(['prefix' => 'auth', 'as' => 'api.auth.'], function () {
     Route::post('login', [\App\Http\Controllers\API\AuthController::class, 'login'])->name('login');
     Route::post('logout', [\App\Http\Controllers\API\AuthController::class, 'logout'])->name('logout');
     Route::get('profile', [\App\Http\Controllers\API\AuthController::class, 'profile'])->name('profile');
+    Route::put('profile', [\App\Http\Controllers\API\AuthController::class, 'updateProfile'])->name('updateProfile');
     Route::post('refresh', [\App\Http\Controllers\API\AuthController::class, 'refresh'])->name('refresh');
     Route::post('forgot_password', [App\Http\Controllers\API\AuthController::class, 'forgotPassword'])->name('forgot_password');
     Route::post('reset_password', [App\Http\Controllers\API\AuthController::class, 'resetPassword'])->name('reset_password');
+    Route::put('change_password', [App\Http\Controllers\API\AuthController::class, 'changePassword'])->name('change_password');
 });
 
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +28,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:100',
             'last_name' => 'required|string|min:3|max:100',
-            'dni' => 'unique:users,dni|required|digits:8',
             'phone' => 'required|digits_between:10,15',
-            'email' => 'unique:users,email|required|email:rfc,dns|min:10|max:100',
+            'dni' => ['required', 'digits:8', Rule::unique('users', 'dni')->ignore(auth()->user()->id)],
         ];
     }
 }

@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'updated_at' => \Carbon\Carbon::parse($this->updated_at)->format('d-m-Y H:i'),
             'school' =>  new SchoolResource($this->whenLoaded('school')),
             'isAdmin' => $this->isAdmin,
+            'school_id' => $this->school_id,
             '_links' => [
                 'self' => route('api.users.show', $this->id),
                 'school' => isset($this->school) ? route('api.schools.show', $this->school->id) : null
