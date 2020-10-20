@@ -15,7 +15,7 @@ class SchoolSeeder extends Seeder
     public function run()
     {
         //vacia la tabla
-        School::truncate();
+        // School::truncate();
 
         //desabilita los event listener durante el relleno de la base de datos
         School::flushEventListeners();

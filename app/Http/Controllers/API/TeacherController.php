@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use Exception;
+use Illuminate\Database\QueryException;
 
 class TeacherController extends BaseController
 {
@@ -65,7 +67,13 @@ class TeacherController extends BaseController
      */
     public function destroy(Teacher $teacher)
     {
-        $teacher->delete();
-        return response()->json(['id' => $teacher->id]);
+        try {
+            $teacher->delete();
+            return response()->json(['id' => $teacher->id]);
+        } catch (QueryException $exception) {
+            if ($exception->errorInfo[1] == 1451) {
+                return response()->json(["message" => 'No se puede eliminar el registro, el docente posee puestos de trabajo activos.'], 409);
+            }
+        }
     }
 }

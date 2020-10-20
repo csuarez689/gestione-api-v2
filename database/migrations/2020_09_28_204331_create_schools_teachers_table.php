@@ -23,7 +23,7 @@ class CreateSchoolsTeachersTable extends Migration
             $table->string('teacher_category_title')->nullable();
 
             $table->foreignId('school_id')->constrained()->onDelete('cascade');
-            $table->foreignId('teacher_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('teacher_id')->constrained();
             $table->foreignId('job_state_id')->nullable()->constrained();
 
             $table->unique(['year', 'division', 'subject', 'school_id']);
