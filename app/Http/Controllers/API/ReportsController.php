@@ -108,19 +108,6 @@ class ReportsController extends BaseController
     {
         $yearFilter = $request->query('year') ? (int)$request->query('year') : '%';
 
-        // SELECT orden_meritos.year,
-        // count(DISTINCT orden_meritos.cuil) as "personas",
-        // COUNT(*) as "inscripciones",
-        // round((COUNT(*) / COUNT(DISTINCT cuil)),2) as "avg_inscripcion_per_person",
-        // provinces.name as "province",
-        // departments.name as "department",
-        // localities.name as "locality"
-        // FROM `orden_meritos`
-        // join localities on localities.name=orden_meritos.locality
-        // join departments on localities.department_id=departments.id
-        // join provinces on departments.province_id=provinces.id
-        // GROUP BY orden_meritos.year,provinces.name,departments.name,localities.name
-
         $data = DB::table('orden_meritos')
             ->select(
                 DB::raw('COUNT(DISTINCT orden_meritos.cuil) AS persons'),
