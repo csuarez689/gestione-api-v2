@@ -61,4 +61,9 @@ Route::group(['as' => 'api.', 'middleware' => 'auth:api'], function () {
     Route::post('failedOrdenesMerito/{failedOrdenMerito}/repair', [\App\Http\Controllers\API\FailedOrdenMeritoController::class, 'repair'])->name('failedOrdenesMerito.repair');
     Route::delete('failedOrdenesMerito/{failedOrdenMerito}', [\App\Http\Controllers\API\FailedOrdenMeritoController::class, 'destroy'])->name('failedOrdenesMerito.destroy');
     Route::delete('failedOrdenesMerito', [\App\Http\Controllers\API\FailedOrdenMeritoController::class, 'truncate'])->name('failedOrdenesMerito.truncate');
+
+    //-------------REPORTS ROUTES-------------
+    Route::group(['prefix' => 'reports', 'as' => 'reports.', 'middleware' => 'role:admin'], function () {
+        Route::get('schoolsCount', [\App\Http\Controllers\API\ReportsController::class, 'schoolsCount'])->name('schoolsCount');
+    });
 });
