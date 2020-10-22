@@ -19,7 +19,8 @@ class FormData extends Controller
         'high_school_types' => \App\Models\HighSchoolType::class,
         'subjects' => 'SELECT DISTINCT subject AS name FROM `schools_teachers` ORDER BY subject ASC',
         'teacher_titles' => 'SELECT DISTINCT teacher_title AS name FROM `schools_teachers` ORDER BY teacher_title ASC',
-        'school_orientations' => 'SELECT DISTINCT orientation AS name FROM `schools` ORDER BY orientation ASC'
+        'school_orientations' => 'SELECT DISTINCT orientation AS name FROM `schools` ORDER BY orientation ASC',
+        'om_years' => 'SELECT DISTINCT year FROM orden_meritos ORDER BY year',
     ];
 
     /**
