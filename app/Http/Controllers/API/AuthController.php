@@ -125,6 +125,8 @@ class AuthController extends BaseController
     {
         $user = JWTAuth::user();
         $user->update($request->validated());
+        $user['school_id'] = $user->school ? $user->school->id : null;
+        unset($user->school);
         return $this->toResource($user);
     }
 
