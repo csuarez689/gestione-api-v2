@@ -27,7 +27,6 @@ class ReportsController extends BaseController
             ->join('localities', 'schools.locality_id', '=', 'localities.id')
             ->join('departments', 'localities.department_id', '=', 'departments.id')
             ->join('provinces', 'departments.province_id', '=', 'provinces.id')
-            ->where('provinces.id', '=', 74) //solo san luis
             ->where('schools.level_id', 'like', $levelFilter)
             ->where('schools.sector_id', 'like', $sectorFilter)
             ->where('schools.type_id', 'like', $typeFilter)
@@ -68,7 +67,6 @@ class ReportsController extends BaseController
             ->join('localities', 'schools.locality_id', '=', 'localities.id')
             ->join('departments', 'localities.department_id', '=', 'departments.id')
             ->join('provinces', 'departments.province_id', '=', 'provinces.id')
-            ->where('provinces.id', '=', 74) //solo san luis
             ->groupBy('department', 'locality')
             ->get()
             ->groupBy(['province', 'department']); //For collection output

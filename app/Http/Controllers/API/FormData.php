@@ -18,7 +18,7 @@ class FormData extends Controller
         'job_states' => \App\Models\JobState::class,
         'high_school_types' => \App\Models\HighSchoolType::class,
         'subjects' => 'SELECT DISTINCT subject AS name FROM `schools_teachers` ORDER BY subject ASC',
-        'teacher_titles' => 'SELECT DISTINCT teacher_title AS name FROM schools_teachers UNION SELECT DISTINCT title1 AS name FROM orden_meritos UNION SELECT DISTINCT title2 AS name FROM orden_meritos ORDER BY name',
+        'teacher_titles' => 'SELECT DISTINCT title1 as "name" from orden_meritos UNION (SELECT DISTINCT title2 as "name" from orden_meritos) ORDER BY name ASC',
         'school_orientations' => 'SELECT DISTINCT orientation AS name FROM `schools` ORDER BY orientation ASC',
         'om_years' => 'SELECT DISTINCT year FROM orden_meritos ORDER BY year',
     ];
