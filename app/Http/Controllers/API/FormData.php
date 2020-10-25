@@ -36,6 +36,7 @@ class FormData extends Controller
             $includes = explode(",", $request->include);
 
             foreach ($includes as $key => $value) {
+
                 if (array_key_exists($value, $this->formData)) {
                     $data[$value] = class_exists($this->formData[$value])
                         ?  $this->formData[$value]::orderBy('name')->get()

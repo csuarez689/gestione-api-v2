@@ -26,6 +26,8 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
     {
         $this->year = $year;
         $this->failsCounter = 0;
+        $this->successCounter = 0;
+        $this->currentCharge = "";
     }
 
     /**
@@ -35,6 +37,7 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
      */
     public function collection(Collection $rows)
     {
+        $failedOrders = array();
         foreach ($rows as $row) {
             $this->currentCharge = $row['cargo'];
             $mappedRow = [
@@ -60,12 +63,13 @@ class OrdenMeritoImport implements ToCollection, WithHeadingRow
                 $this->failsCounter += 1;
                 $errors = json_encode($validator->messages()->get('*'));
                 $mappedRow['errors'] = $errors;
-                FailedOrdenMerito::create($mappedRow);
+                array_push($failedOrders, $mappedRow);
             } else {
                 OrdenMerito::create($mappedRow);
                 $this->successCounter += 1;
             }
         }
+        FailedOrdenMerito::insert($failedOrders);
     }
 
     private function getRules(): array
