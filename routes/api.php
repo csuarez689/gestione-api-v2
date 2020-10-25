@@ -67,5 +67,6 @@ Route::group(['as' => 'api.', 'middleware' => 'auth:api'], function () {
         Route::get('schoolsCount', [\App\Http\Controllers\API\ReportsController::class, 'schoolsCount'])->name('schoolsCount');
         Route::get('teachingPlantCharges', [\App\Http\Controllers\API\ReportsController::class, 'teachingPlantCharges'])->name('teachingPlantCharges');
         Route::get('omInscriptions', [\App\Http\Controllers\API\ReportsController::class, 'omInscriptions'])->name('omInscriptions');
+        Route::get('omInscriptionsJobs', [\App\Http\Controllers\API\ReportsController::class, 'omInscriptionsJobs'])->name('omInscriptionsJobs');
     });
 });
