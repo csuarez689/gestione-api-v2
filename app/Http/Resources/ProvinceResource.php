@@ -17,9 +17,6 @@ class ProvinceResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            '_links' => [
-                'deparments' => route('api.departments', $this->id)
-            ]
         ];
     }
 }

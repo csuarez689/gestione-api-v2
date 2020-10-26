@@ -22,9 +22,6 @@ class TeacherResource extends JsonResource
             'gender' => $this->gender,
             'locality' => new LocalityResource($this->whenLoaded('locality')),
             'updated_at' => \Carbon\Carbon::parse($this->updated_at)->format('d-m-Y H:i'),
-            '_links' => [
-                'self' => route('api.teachers.show', $this->id),
-            ]
         ];
     }
 }

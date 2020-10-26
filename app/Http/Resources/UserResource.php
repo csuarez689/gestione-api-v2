@@ -25,10 +25,6 @@ class UserResource extends JsonResource
             'school' =>  new SchoolResource($this->whenLoaded('school')),
             'isAdmin' => $this->isAdmin,
             'school_id' => $this->school_id,
-            '_links' => [
-                'self' => route('api.users.show', $this->id),
-                'school' => isset($this->school) ? route('api.schools.show', $this->school->id) : null
-            ]
         ];
     }
 }

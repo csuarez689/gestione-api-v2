@@ -31,9 +31,6 @@ class FailedOrdenMeritoResource extends JsonResource
             "errors" => $this->errors,
             "created_at" => \Carbon\Carbon::parse($this->created_at)->format('d-m-Y H:i'),
             "updated_at" => \Carbon\Carbon::parse($this->updated_at)->format('d-m-Y H:i'),
-            '_links' => [
-                'self' => route('api.failedOrdenesMerito.show', $this->id),
-            ]
         ];
     }
 }

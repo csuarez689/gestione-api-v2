@@ -18,9 +18,6 @@ class DepartmentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'province_id' => $this->province_id,
-            '_links' => [
-                'localities' => route('api.localities', $this->id)
-            ]
         ];
     }
 }
