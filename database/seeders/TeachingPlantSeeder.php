@@ -21,6 +21,6 @@ class TeachingPlantSeeder extends Seeder
         TeachingPlant::flushEventListeners();
 
         //seed regular user using factory
-        TeachingPlant::factory()->times(1000)->create();
+        TeachingPlant::factory()->times(200)->create();
     }
 }

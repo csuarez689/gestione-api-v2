@@ -21,6 +21,6 @@ class SchoolSeeder extends Seeder
         School::flushEventListeners();
 
         //seed regular user using factory
-        School::factory()->times(100)->create();
+        School::factory()->times(20)->create();
     }
 }

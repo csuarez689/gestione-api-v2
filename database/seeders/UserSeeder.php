@@ -37,6 +37,6 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([$adminUser]);
 
         //seed regular user using factory
-        User::factory()->times(100)->create();
+        User::factory()->times(20)->create();
     }
 }
