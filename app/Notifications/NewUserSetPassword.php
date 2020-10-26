@@ -40,7 +40,7 @@ class NewUserSetPassword extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('http://localhost:8080/login/resetPassword/' . $this->token);
+        $url = url('https://gestione-2020.web.app/login/resetPassword/' . $this->token);
 
         return (new MailMessage)
             ->line('Se ha creado la cuenta de manera exitosa.')

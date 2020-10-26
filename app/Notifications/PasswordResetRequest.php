@@ -43,7 +43,7 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('http://localhost:8080/login/resetPassword/' . $this->token);
+        $url = url('https://gestione-2020.web.app/login/resetPassword/' . $this->token);
 
         return (new MailMessage)
             ->line('Has recibido este correo para resetear el accesso a tu cuenta.')
